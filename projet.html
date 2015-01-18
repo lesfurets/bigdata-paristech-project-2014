@@ -425,7 +425,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Vous pouvez telecharger ce document en format pdf: <a href="projet.pdf"><strong><em>Version 0.9</em></strong></a></p>
+<p>Vous pouvez télécharger ce document en format pdf: <a href="projet.pdf"><strong><em>Version 1.0</em></strong></a></p>
 </div>
 </td>
 </tr>
@@ -434,7 +434,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_intro">Intro</h2>
+<h2 id="_intro">1. Intro</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Le but du projet est de concevoir un système d&#8217;alerte tsunami par SMS pour le Japon suite à un tremblement de terre.</p>
@@ -445,23 +445,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_contexte">Contexte</h2>
+<h2 id="_contexte">2. Contexte</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Le Japon est un pays de 127 millions d&#8217;habitants situé sur la ceinture de feu du pacifique. On y ressence plus de 5000 seismes importants par an. Certains d&#8217;entre eux déclanchent des tsunamis qui représentent un danger mortel pour la population.</p>
+<p>Le Japon est un pays de 127 millions d&#8217;habitants situé sur la ceinture de feu du pacifique. On y ressence plus de 5000 séismes importants par an. Certains d&#8217;entre eux déclanchent des tsunamis qui représentent un danger mortel pour la population.</p>
 </div>
 <div class="paragraph">
-<p>Le but de ce projet et de prévenir par SMS tous les habitants exposés a un risque de tsunami le plus rapidement possible, afin qu&#8217;ils se mettent à l&#8217;abri.</p>
+<p>Le but de ce projet et de prévenir par SMS tous les habitants exposés à un risque de tsunami le plus rapidement possible, afin qu&#8217;ils se mettent à l&#8217;abri.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_contexte_technique">Contexte technique</h2>
+<h2 id="_contexte_technique">3. Contexte technique</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_a_jeu_de_données">A. Jeu de données</h3>
+<h3 id="_a_jeu_de_données">3.1. A. Jeu de données</h3>
 <div class="paragraph">
-<p>Nous mettons à votre disposition les données d&#8217;un opérateur téléphonique (<strong><em>LesFuretsMobile</em></strong>) qui contient l&#8217;historique des positions des habitants (<em>timestamp</em>, <em>code celule GSM</em>, <em>latitude</em>, <em>longitude</em>, <em>telephone</em> ).
+<p>Nous mettons à votre disposition les données d&#8217;un opérateur téléphonique (<strong><em>LesFuretsMobile</em></strong>) qui contient l&#8217;historique des positions des habitants (<em>timestamp</em>, <em>code cellule GSM</em>, <em>latitude</em>, <em>longitude</em>, <em>telephone</em> ).
 Pour simplifier, on ne considérera que la population des 10 plus grandes villes du Japon:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
@@ -558,9 +558,57 @@ Pour simplifier, on ne considérera que la population des 10 plus grandes villes
 <div class="paragraph">
 <p>Vous devrez charger ces données dans un cluster de <strong><em>5 noeuds</em></strong> situés dans les <strong><em>5 villes les plus peuplées</em></strong>.</p>
 </div>
+<div class="sect3">
+<h4 id="_donnees_disponible_sur_aws">3.1.1. Donnees disponible sur AWS:</h4>
+<div class="paragraph">
+<p>On a mis sur S3, 3 jeux de données sur lesquels vous pouvez tester vos programmes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Jeux de données:</caption>
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s3n://bigdata-paristech/projet2014/data/data_1MB.csv</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s3n://bigdata-paristech/projet2014/data/data_1GB.csv</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s3n://bigdata-paristech/projet2014/data/data_10GB.csv</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Le jeu final du projet aura 100GB et sera disponible a:</p>
+</div>
+<div class="paragraph">
+<p><strong><em>s3n://bigdata-paristech/projet2014/data/data_100GB.csv</em></strong></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Ces jeux de données sont accessibles <strong><em>uniquement depuis la région us-east-1 de AWS</em></strong>. N&#8217;oubliez pas cet aspect quand vous créerez votre cluster (mettez les nœuds dans la région <strong><em>us-east-1</em></strong>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_b_cas_d_utilisation">B. Cas d&#8217;utilisation</h3>
+<h3 id="_b_cas_d_utilisation">3.2. B. Cas d&#8217;utilisation</h3>
 <div class="paragraph">
 <p>Lors du tremblement de terre, qui survient de manière aléatoire au large du Japon, la population située à moins de 500km de l&#8217;épicentre est considérée en danger. Les noeuds situés dans cette zone seront alors indisponibles. Le système doit néanmoins alerter la population qui s&#8217;y trouve.</p>
 </div>
@@ -572,14 +620,14 @@ Pour simplifier, on ne considérera que la population des 10 plus grandes villes
 </td>
 <td class="content">
 <div class="paragraph">
-<p>On ne vous demande pas d&#8217;envoyer des sms, vous devez modéliser le système d&#8217;alerte par sms par un insert dans une base de données avec au minimum: <em>date et heure de réception</em>,  <em>numéro de téléphone</em> et <em>position lors du tremblement de tere</em> (<em>latitude</em>, <em>longitude</em>).</p>
+<p>On ne vous demande pas d&#8217;envoyer des sms, vous devez modéliser le système d&#8217;alerte par SMS par un insert dans une base de données avec au minimum: <em>date et heure de réception</em>,  <em>numéro de téléphone</em> et <em>position lors du tremblement de terre</em> (<em>latitude</em>, <em>longitude</em>).</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_application_minimale">Application minimale</h4>
+<h4 id="_application_minimale">3.2.1. Application minimale</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -593,27 +641,27 @@ Pour simplifier, on ne considérera que la population des 10 plus grandes villes
 <p>couper les noeuds présents dans la zone à risque</p>
 </li>
 <li>
-<p>prévenir la population.</p>
+<p>prévenir la population</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Donner le temps qu&#8217;a mis le système pour prévenir 80% des gens</p>
+<p>Donner le temps qu&#8217;a mis le système pour prévenir 80% de la population</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_contraintes">C. Contraintes</h3>
+<h3 id="_c_contraintes">3.3. C. Contraintes</h3>
 <div class="paragraph">
 <p>On utilisera au moins 1 technologie vue en cours en expliquant les raisons de votre choix.
 Et on utilisera <strong><em>AWS</em></strong> pour deployer le cluster.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_d_les_livrables">D. Les livrables</h3>
+<h3 id="_d_les_livrables">3.4. D. Les livrables</h3>
 <div class="paragraph">
 <p>Vous devrez fournir:</p>
 </div>
@@ -631,7 +679,7 @@ Et on utilisera <strong><em>AWS</em></strong> pour deployer le cluster.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_iv_organisation">IV. Organisation</h2>
+<h2 id="_iv_organisation">4. IV. Organisation</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Vous travaillerez par groupe de 3 personnes.
@@ -667,7 +715,7 @@ La soutenance se déroulera de la manière suivante:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pour_aller_plus_loin_points_bonus">Pour aller plus loin (points bonus)</h2>
+<h2 id="_pour_aller_plus_loin_points_bonus">5. Pour aller plus loin (points bonus)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Vous êtes libres de proposer des fonctionnalités supplémentaires comme par exemple:</p>
@@ -675,7 +723,7 @@ La soutenance se déroulera de la manière suivante:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Suivi en temps réel de la notification des gens (compteur,carte,&#8230;&#8203;)</p>
+<p>Suivi en temps réel de la notification des gens (compteur, carte, &#8230;&#8203;)</p>
 </li>
 <li>
 <p>Avertir en premier les personnes les plus proches</p>
@@ -696,7 +744,7 @@ La soutenance se déroulera de la manière suivante:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-12-20 20:34:52 CET
+Last updated 2015-01-18 15:32:45 CET
 </div>
 </div>
 </body>

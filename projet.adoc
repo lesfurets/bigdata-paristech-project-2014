@@ -3,7 +3,7 @@
 
 [NOTE]
 ====          
-Vous pouvez télécharger ce document en format pdf: link:projet.pdf[*_Version 0.9_*] 
+Vous pouvez télécharger ce document en format pdf: link:projet.pdf[*_Version 1.0_*] 
 ====
 == Intro
 Le but du projet est de concevoir un système d'alerte tsunami par SMS pour le Japon suite à un tremblement de terre.
@@ -36,6 +36,25 @@ Rang,Ville,Population,Lat,Long
 |===
 
 Vous devrez charger ces données dans un cluster de *_5 noeuds_* situés dans les *_5 villes les plus peuplées_*.
+
+==== Donnees disponible sur AWS:
+On a mis sur S3, 3 jeux de données sur lesquels vous pouvez tester vos programmes:
+
+[format="csv", options="header", title="Jeux de données:"]
+|===
+URL
+s3n://bigdata-paristech/projet2014/data/data_1MB.csv 
+s3n://bigdata-paristech/projet2014/data/data_1GB.csv
+s3n://bigdata-paristech/projet2014/data/data_10GB.csv
+|=== 
+Le jeu final du projet aura 100GB et sera disponible a:
+
+*_s3n://bigdata-paristech/projet2014/data/data_100GB.csv_*
+
+[WARNING]
+====
+Ces jeux de données sont accessibles *_uniquement depuis la région us-east-1 de AWS_*. N'oubliez pas cet aspect quand vous créerez votre cluster (mettez les nœuds dans la région *_us-east-1_*).
+====
 
 === B. Cas d'utilisation
 Lors du tremblement de terre, qui survient de manière aléatoire au large du Japon, la population située à moins de 500km de l'épicentre est considérée en danger. Les noeuds situés dans cette zone seront alors indisponibles. Le système doit néanmoins alerter la population qui s'y trouve.
