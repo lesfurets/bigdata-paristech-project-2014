@@ -1,0 +1,86 @@
+= Projet : Arato tsunami (Tsunami Alert)
+:icons: font
+
+[NOTE]
+====          
+Vous pouvez télécharger ce document en format pdf: link:projet.pdf[*_Version 0.9_*] 
+====
+== Intro
+Le but du projet est de concevoir un système d'alerte tsunami par SMS pour le Japon suite à un tremblement de terre.
+
+La population située dans les zones menacées doit être prévenue. Dans votre projet, vous devrez mettre en place ce système et évaluer sa performance.
+
+== Contexte
+Le Japon est un pays de 127 millions d'habitants situé sur la ceinture de feu du pacifique. On y ressence plus de 5000 séismes importants par an. Certains d'entre eux déclanchent des tsunamis qui représentent un danger mortel pour la population.
+
+Le but de ce projet et de prévenir par SMS tous les habitants exposés à un risque de tsunami le plus rapidement possible, afin qu'ils se mettent à l'abri.
+
+== Contexte technique
+=== A. Jeu de données
+Nous mettons à votre disposition les données d'un opérateur téléphonique (*_LesFuretsMobile_*) qui contient l'historique des positions des habitants (_timestamp_, _code cellule GSM_, _latitude_, _longitude_, _telephone_ ).
+Pour simplifier, on ne considérera que la population des 10 plus grandes villes du Japon:
+
+[format="csv", options="header", title="Villes les plus peuplées:"]
+|===
+Rang,Ville,Population,Lat,Long
+1,Tokyo,9 128 090,35.732727,139.722404
+2,Yokohama,3 709 777,35.462635,139.774854
+3,Osaka,2 685 218,34.705359,135.500729
+4,Nagoya,2 275 428,35.193866,136.907394
+5,Sapporo,1 919 684,43.179025,141.388028
+6,Kobe,1 538 281,34.699714,135.187619
+7,Fukuoka,1 516 575,33.643127,130.355035
+8,Kyoto,1 469 912,35.043493,135.771593
+9,Kawasaki,1 459 191,35.557485,139.698357
+10,Saitama,1 250 407,35.867481,139.642576
+|===
+
+Vous devrez charger ces données dans un cluster de *_5 noeuds_* situés dans les *_5 villes les plus peuplées_*.
+
+=== B. Cas d'utilisation
+Lors du tremblement de terre, qui survient de manière aléatoire au large du Japon, la population située à moins de 500km de l'épicentre est considérée en danger. Les noeuds situés dans cette zone seront alors indisponibles. Le système doit néanmoins alerter la population qui s'y trouve.
+
+[NOTE]
+====          
+On ne vous demande pas d'envoyer des sms, vous devez modéliser le système d'alerte par SMS par un insert dans une base de données avec au minimum: _date et heure de réception_,  _numéro de téléphone_ et _position lors du tremblement de terre_ (_latitude_, _longitude_).
+====
+
+==== Application minimale
+. Précharger les données dans le cluster
+. Simuler un tremblement de terre à des coordonnées fournies
+.. couper les noeuds présents dans la zone à risque
+.. prévenir la population
+. Donner le temps qu'a mis le système pour prévenir 80% de la population
+
+=== C. Contraintes
+On utilisera au moins 1 technologie vue en cours en expliquant les raisons de votre choix. 
+Et on utilisera *_AWS_* pour deployer le cluster.
+
+=== D. Les livrables 
+
+Vous devrez fournir:
+
+* le code source
+* un manuel de l'utilisateur (installation, architecture, utilisation, performances)
+
+== IV. Organisation
+Vous travaillerez par groupe de 3 personnes. 
+La soutenance se déroulera de la manière suivante:
+
+. Présentation: 10 minutes
+. Démo: 10 minutes
+. Question & Réponses : 10 minutes
+
+[WARNING]
+====
+Lors de cette soutenance, les données devront être préalablement chargées dans votre cluster. La *_date_*, *_l'heure_* et les *_coordonnées_* du tremblement de terre vous seront révélées au début de la démo.
+====
+
+== Pour aller plus loin (points bonus)
+Vous êtes libres de proposer des fonctionnalités supplémentaires comme par exemple:
+
+* Suivi en temps réel de la notification des gens (compteur, carte, ...)
+* Avertir en premier les personnes les plus proches
+* Evaluer les performances en faisant varier le nombre de noeuds ou de réplicas
+* Ajouter une interface graphique
+* Imaginer des répliques au tremblement de terre
